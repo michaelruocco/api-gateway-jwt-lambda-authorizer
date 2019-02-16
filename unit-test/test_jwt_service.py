@@ -2,10 +2,10 @@ import unittest
 import uuid
 import logging
 
-from mock import patch
-from src.jwt_service import JwtService
-from freezegun import freeze_time
+from jwt_service.jwt_service import JwtService
 from jwt import ExpiredSignatureError
+from mock import patch
+from freezegun import freeze_time
 
 
 @freeze_time("2012-02-16")

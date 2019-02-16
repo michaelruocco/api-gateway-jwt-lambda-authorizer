@@ -1,0 +1,15 @@
+{
+  "policyDocument": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Action": "execute-api:Invoke",
+        "Resource": [
+          "arn:aws:execute-api:eu-west-1:327122349051:8tu67utdf7/*/*/*"
+        ],
+        "Effect": "Allow"
+      }
+    ]
+  },
+  "principalId": "allow-all"
+}

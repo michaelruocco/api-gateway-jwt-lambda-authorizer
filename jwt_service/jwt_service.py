@@ -44,7 +44,7 @@ class JwtService:
         return payload
 
     def encode(self, payload):
-        self.logger.info('creating jwt token with payload {}'.format(payload))
+        self.logger.info('creating jwt_service token with payload {}'.format(payload))
         token = jwt.encode(payload, self.secret, algorithm='HS256')
         self.logger.info('returning token {}'.format(token))
         return token
