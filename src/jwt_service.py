@@ -23,7 +23,10 @@ class JwtService:
         return self.encode(payload)
 
     def decode(self, token):
-        return jwt.decode(token, self.secret)
+        self.logger.info('decoding token {}'.format(token))
+        payload = jwt.decode(token, self.secret)
+        self.logger.info('decoded token into payload {}'.format(payload))
+        return payload
 
     def build_expiring_payload(self, subject, seconds_to_live):
         issued_at = datetime.datetime.now()
