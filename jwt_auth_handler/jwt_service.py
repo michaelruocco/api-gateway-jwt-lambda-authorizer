@@ -8,10 +8,13 @@ from datetime import timedelta
 
 class JwtService:
 
-    def __init__(self, issuer, secret):
+    DEFAULT_ALGORITHM = 'HS256'
+
+    def __init__(self, secret_key, issuer, algorithm=DEFAULT_ALGORITHM):
         self.logger = logging.getLogger(__name__)
+        self.secret_key = secret_key
         self.issuer = issuer
-        self.secret = secret
+        self.algorithm = algorithm
 
     def create_non_expiring_token(self, subject):
         issued_at = datetime.datetime.now()
@@ -24,7 +27,7 @@ class JwtService:
 
     def decode(self, token):
         self.logger.info('decoding token {}'.format(token))
-        payload = jwt.decode(token, self.secret)
+        payload = jwt.decode(token, self.secret_key)
         self.logger.info('decoded token into payload {}'.format(payload))
         return payload
 
@@ -44,8 +47,8 @@ class JwtService:
         return payload
 
     def encode(self, payload):
-        self.logger.info('creating jwt_service token with payload {}'.format(payload))
-        token = jwt.encode(payload, self.secret, algorithm='HS256')
+        self.logger.info('creating token from payload {}'.format(payload))
+        token = jwt.encode(payload, self.secret_key, self.algorithm)
         self.logger.info('returning token {}'.format(token))
         return token
 

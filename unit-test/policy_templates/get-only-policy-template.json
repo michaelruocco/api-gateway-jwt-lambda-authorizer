@@ -1,0 +1,15 @@
+{
+  "policyDocument": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Action": "execute-api:Invoke",
+        "Resource": [
+          "arn:aws:execute-api:%REGION%:%ACCOUNT_ID%:%API_ID%/%STAGE%/GET/verificationContexts/*"
+        ],
+        "Effect": "Allow"
+      }
+    ]
+  },
+  "principalId": "%PRINCIPAL_ID%"
+}

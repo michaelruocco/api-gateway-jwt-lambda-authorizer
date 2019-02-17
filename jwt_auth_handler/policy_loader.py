@@ -1,20 +1,19 @@
 import logging
 
 from arn import Arn
-from util.file_content_loader import load_file_content
 
 
 class PolicyLoader:
 
-    def __init__(self):
+    def __init__(self, policies, default_policy_key):
         self.logger = logging.getLogger(__name__)
-        self.policies = {
-            'deny-all': load_file_content(__name__, 'policies/deny-all-policy.json')
-        }
+        self.policies = policies
+        self.default_policy_key = default_policy_key
 
     def load(self, principal_id, arn_value):
+        self.logger.info('loading policy for principal id {}'.format(principal_id))
         template = self.load_template(principal_id)
-        self.logger.info('loaded template {} for principal id {}'.format(template, principal_id))
+        self.logger.info('loaded policy template {}'.format(template))
         policy = PolicyLoader.apply(principal_id, arn_value, template)
         self.logger.info('returning populated policy {}'.format(policy))
         return policy
@@ -22,7 +21,7 @@ class PolicyLoader:
     def load_template(self, principal_id):
         if principal_id in self.policies:
             return self.policies[principal_id]
-        return self.policies['deny-all']
+        return self.policies[self.default_policy_key]
 
     @staticmethod
     def apply(principal_id, arn_value, template):
