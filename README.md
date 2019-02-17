@@ -1,8 +1,22 @@
-# Basic Python Unit Tests
+# Lambda JWT Authorizer
 
-This is a very noddy project with an example of some
-unit tests that test some code that uses an published
-python package
+This project contains an Python implementation of an AWS
+Lambda function that can be used as an authorizer with
+AWS API Gateway.
+
+
+## Deploying (using makefile)
+
+A makefile has been provided to deploying the lambda
+function to AWS more easily. To do this it uses the
+Serverless plugin, additionally the serverless-python-requirements
+plugin is used with Serverless in order to allow packaging
+of the Python dependencies required for the code to run.
+To deploy the function you can run:
+
+```
+make deploy
+```
 
 ## Running the tests (using makefile)
 

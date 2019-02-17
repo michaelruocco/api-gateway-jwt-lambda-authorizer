@@ -22,4 +22,5 @@ class LambdaJwtAuthHandler:
         return payload['sub']
 
     def load_policy(self, principal_id, arn):
+        self.logger.info('loading policy with principal id {} and arn {}'.format(principal_id, arn))
         return self.policy_loader.load(principal_id, arn)

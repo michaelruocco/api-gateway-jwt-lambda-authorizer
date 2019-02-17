@@ -1,0 +1,43 @@
+service: jwt-auth
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+
+  defaultStage: dev
+  defaultRegion: eu-west-1
+  defaultVersion: 1.0.0-SNAPSHOT
+
+  stage: ${opt:stage, self:custom.defaultStage}
+  region: ${opt:region, self:custom.defaultRegion}
+  version: ${opt:version, self:custom.defaultVersion}
+
+  lambdas:
+
+    idvAuthorizer:
+      name: ${self:custom.stage}-idvAuthorizer
+
+provider:
+  name: aws
+  runtime: python3.7
+  stage: ${self:custom.stage}
+  region: ${self:custom.region}
+  timeout: 20
+  environment:
+    STAGE: ${self:custom.stage}
+    REGION: ${self:custom.region}
+
+package:
+ exclude:
+   - venv/**
+   - test/**
+
+functions:
+  idvAuthorizer:
+    environment:
+      IDV_AUTH_JWT_SECRET_KEY: 'my-secret'
+    handler: idv_jwt_auth_handler.handler.handle
+    name: ${self:custom.lambdas.idvAuthorizer.name}

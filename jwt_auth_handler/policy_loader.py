@@ -1,6 +1,6 @@
 import logging
 
-from arn import Arn
+from jwt_auth_handler.arn import Arn
 
 
 class PolicyLoader:

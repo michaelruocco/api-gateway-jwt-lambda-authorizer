@@ -7,5 +7,5 @@ from jwt_auth_handler.lambda_jwt_auth_handler import LambdaJwtAuthHandler
 
 class IdvLambdaJwtAuthHandler(LambdaJwtAuthHandler):
 
-    def __init__(self):
-        LambdaJwtAuthHandler.__init__(self, IdvJwtService(os.environ['JWT_SECRET_KEY']), IdvPolicyLoader)
+    def __init__(self, secret_key):
+        LambdaJwtAuthHandler.__init__(self, IdvJwtService(secret_key), IdvPolicyLoader())
