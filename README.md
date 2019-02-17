@@ -53,7 +53,7 @@ Once the environment has been set up you can run the
 tests by executing the following command:
 
 ```
-python -m unittest discover --start-directory unit-test
+python -m unittest discover --start-directory test/unit
 ```
 
 ## Deactivating Virtualenv
