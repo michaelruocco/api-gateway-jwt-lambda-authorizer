@@ -20,6 +20,9 @@ custom:
     idvAuthorizer:
       name: ${self:custom.stage}-idv-authorizer
 
+    idvTokenGenerator:
+      name: ${self:custom.stage}-idv-token-generator
+
 provider:
   name: aws
   runtime: python3.7
@@ -39,5 +42,14 @@ functions:
   idvAuthorizer:
     environment:
       IDV_AUTH_JWT_SECRET_KEY: 'my-secret'
-    handler: idv_jwt_auth_handler.handler.handle
+    handler: idv_jwt_auth_handler.authorizer_handler.handle
     name: ${self:custom.lambdas.idvAuthorizer.name}
+  idvTokenGenerator:
+    environment:
+      IDV_AUTH_JWT_SECRET_KEY: 'my-secret'
+    handler: idv_jwt_auth_handler.get_token_handler.handle
+    name: ${self:custom.lambdas.idvTokenGenerator.name}
+    events:
+      - http:
+          path: tokens
+          method: post
