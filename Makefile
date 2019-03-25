@@ -1,4 +1,4 @@
-.PHONY: clean test deploy
+.PHONY: clean test deploy remove
 
 venv: venv/bin/activate
 
@@ -10,6 +10,10 @@ venv/bin/activate: requirements.txt
 deploy: test
 	npm install
 	sls deploy
+
+remove:
+	npm install
+	sls remove
 
 test: venv
 	. venv/bin/activate; python -m unittest discover --start-directory test/unit
