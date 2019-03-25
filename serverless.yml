@@ -18,7 +18,7 @@ custom:
   lambdas:
 
     idvAuthorizer:
-      name: ${self:custom.stage}-idvAuthorizer
+      name: ${self:custom.stage}-idv-authorizer
 
 provider:
   name: aws

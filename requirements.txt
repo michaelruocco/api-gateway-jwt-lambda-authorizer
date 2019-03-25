@@ -1,1 +1,3 @@
 PyJWT
+mock
+freezegun

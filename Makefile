@@ -9,7 +9,7 @@ venv/bin/activate: requirements.txt
 
 deploy: test
 	npm install
-	serverless deploy
+	sls deploy
 
 test: venv
 	. venv/bin/activate; python -m unittest discover --start-directory test/unit
